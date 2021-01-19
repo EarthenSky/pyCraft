@@ -19,6 +19,11 @@ from .explosion_packet import ExplosionPacket
 from .sound_effect_packet import SoundEffectPacket
 from .face_player_packet import FacePlayerPacket
 
+from .chunk_data_packet import ChunkDataPacket
+from .unload_chunk_packet import UnloadChunkPacket
+from .window_items_packet import WindowItemsPacket
+from .set_slot_packet import SetSlotPacket
+from .held_item_change_packet import HeldItemChangePacket
 
 # Formerly known as state_playing_clientbound.
 def get_packets(context):
@@ -55,6 +60,14 @@ def get_packets(context):
     if context.protocol_version >= 352:
         packets |= {
             FacePlayerPacket
+        }
+    if context.protocol_version >= 578:
+        packets |= {
+            ChunkDataPacket,
+            UnloadChunkPacket,
+            WindowItemsPacket,
+            SetSlotPacket,
+            HeldItemChangePacket
         }
     return packets
 

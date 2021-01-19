@@ -103,6 +103,7 @@ class Packet(object):
         # length, packet ID, compression and encryption) into a PacketBuffer.
         for field in self.definition:
             for var_name, data_type in field.items():
+                #DEBUG: print("write fields: {} {}".format(var_name, data_type))
                 data = getattr(self, var_name)
                 data_type.send_with_context(data, packet_buffer, self.context)
 

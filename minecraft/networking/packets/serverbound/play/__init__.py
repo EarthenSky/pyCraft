@@ -10,6 +10,11 @@ from minecraft.networking.types import (
 
 from .client_settings_packet import ClientSettingsPacket
 
+from .player_position_packet import PlayerPositionPacket
+from .player_digging_packet import PlayerDiggingPacket
+from .pick_item_packet import PickItemPacket
+from .held_item_change_packet import HeldItemChangePacket
+
 
 # Formerly known as state_playing_serverbound.
 def get_packets(context):
@@ -30,6 +35,13 @@ def get_packets(context):
     if context.protocol_version >= 107:
         packets |= {
             TeleportConfirmPacket,
+        }
+    if context.protocol_version >= 578:
+        packets |= {
+            PlayerPositionPacket,
+            PlayerDiggingPacket,
+            PickItemPacket,
+            HeldItemChangePacket,
         }
     return packets
 
